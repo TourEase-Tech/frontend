@@ -1,11 +1,12 @@
 import { useRoutes } from 'react-router-dom'
 import path from '../constants/path'
-import HomeLayout from '../layouts/Homelayout'
 import { Suspense, lazy } from 'react'
+import HomeLayout from '../layouts/Homelayout'
 import AuthenticationLayout from '../layouts/AuthenticationLayout'
 
 const HomePage = lazy(() => import('src/modules/Landingpage/pages/HomePage'))
-
+const LoginPage = lazy(() => import('src/modules/Authentication/pages/LoginPage'))
+const RegisterPage = lazy(() => import('src/modules/Authentication/pages/RegisterPage'))
 const useRouteElements = () => {
   const routeElements = useRoutes([
     {
@@ -23,7 +24,7 @@ const useRouteElements = () => {
       element: (
         <AuthenticationLayout>
           <Suspense>
-            <div>Login</div>
+            <LoginPage />
           </Suspense>
         </AuthenticationLayout>
       )
@@ -33,7 +34,7 @@ const useRouteElements = () => {
       element: (
         <AuthenticationLayout>
           <Suspense>
-            <div>Register</div>
+            <RegisterPage />
           </Suspense>
         </AuthenticationLayout>
       )

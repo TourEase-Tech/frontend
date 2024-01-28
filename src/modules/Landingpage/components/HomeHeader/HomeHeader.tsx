@@ -68,7 +68,7 @@ const HomeHeader = () => {
             </ul>
           </div>
           <Link
-            to={path.login}
+            to={path.register}
             className='rounded-full border border-solid border-white px-6  py-2 text-white text-[14px] hover:bg-[#4c4c4c] transition-all duration-700'
           >
             Register
