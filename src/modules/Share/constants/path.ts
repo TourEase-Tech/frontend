@@ -1,6 +1,6 @@
 const path = {
   //Client
-  home_page: '/frontend/',
+  home_page: '/',
   login: '/frontend/login',
   register: '/frontend/register',
   //Auth
