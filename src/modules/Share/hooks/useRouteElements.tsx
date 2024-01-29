@@ -7,6 +7,7 @@ import AuthenticationLayout from '../layouts/AuthenticationLayout'
 const HomePage = lazy(() => import('src/modules/Landingpage/pages/HomePage'))
 const LoginPage = lazy(() => import('src/modules/Authentication/pages/LoginPage'))
 const RegisterPage = lazy(() => import('src/modules/Authentication/pages/RegisterPage'))
+
 const useRouteElements = () => {
   const routeElements = useRoutes([
     {

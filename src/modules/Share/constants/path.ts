@@ -1,15 +1,15 @@
 const path = {
   //Client
   home_page: '/',
-  login: '/frontend/login',
-  register: '/frontend/register',
+  login: '/login',
+  register: '/register',
   //Auth
-  forget_password: '/frontend/forgetPassword',
-  reset_password: '/frontend/resetPassword',
+  forget_password: '/forgetPassword',
+  reset_password: '/resetPassword',
   //Admin
-  admin_login: '/frontend/admin/login',
-  dashboard: '/frontend/admin/dashboard',
-  user: '/frontend/admin/users'
+  admin_login: '/admin/login',
+  dashboard: '/admin/dashboard',
+  user: '/admin/users'
 } as const
 
 export default path
