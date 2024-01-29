@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://tourease-tech.github.io/frontend/",
   "scripts": {
-    "homepage":"https://tourease-tech.github.io/frontend/",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
