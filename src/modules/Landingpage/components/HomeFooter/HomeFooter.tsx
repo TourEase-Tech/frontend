@@ -17,11 +17,8 @@ const HomeFooter = () => {
             </div>
           </div>
           <div className='flex flex-col text-[#484848] text-[10px]'>
-            <span>© 2023 LEGENDARIES, Inc. © 2023 Riot Games, Inc. All Rights Reserved.</span>
-            <span>
-              League of Legends Champions Korea (LCK), League of Legends and Riot Games are trademarks or registered
-              trademarks of Riot Games, Inc.
-            </span>
+            <span></span>
+            <span></span>
           </div>
           <div className='flex flex-row gap-[8px]'>
             <Link to='' className='px-2 py-2 bg-[#303030] rounded-3xl'>
