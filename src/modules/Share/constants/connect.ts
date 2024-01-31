@@ -1,4 +1,4 @@
 const connect = {
-  baseUrl: import.meta.env.VITE_APP_API_URL
+  baseUrl: 'https://tourease-bul6.onrender.com/api'
 } as const
 export default connect
