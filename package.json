@@ -13,10 +13,18 @@
     "prettier:fix": "prettier --write \"src/**/(*.tsx|*ts|*.css|*.scss)\""
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.4",
+    "@mui/icons-material": "^5.15.7",
+    "@mui/lab": "^5.0.0-alpha.163",
+    "@mui/material": "^5.15.7",
+    "@mui/x-date-pickers": "^6.19.2",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tanstack/react-query": "^5.17.19",
+    "axios": "^1.6.7",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.4",
@@ -24,6 +32,7 @@
     "react-icons": "^5.0.1",
     "react-loading-skeleton": "^3.3.1",
     "react-router-dom": "^6.21.3",
+    "react-toastify": "^10.0.4",
     "tailwind-scrollbar": "^3.0.5",
     "yup": "^1.3.3"
   },

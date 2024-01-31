@@ -7,6 +7,7 @@ import AuthenticationLayout from '../layouts/AuthenticationLayout'
 const HomePage = lazy(() => import('src/modules/Landingpage/pages/HomePage'))
 const LoginPage = lazy(() => import('src/modules/Authentication/pages/LoginPage'))
 const RegisterPage = lazy(() => import('src/modules/Authentication/pages/RegisterPage'))
+const ForgetPasswordPage = lazy(() => import('src/modules/Authentication/pages/ForgetPasswordPage'))
 
 const useRouteElements = () => {
   const routeElements = useRoutes([
@@ -36,6 +37,16 @@ const useRouteElements = () => {
         <AuthenticationLayout>
           <Suspense>
             <RegisterPage />
+          </Suspense>
+        </AuthenticationLayout>
+      )
+    },
+    {
+      path: path.forget_password,
+      element: (
+        <AuthenticationLayout>
+          <Suspense>
+            <ForgetPasswordPage />
           </Suspense>
         </AuthenticationLayout>
       )

@@ -3,16 +3,28 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import path from 'src/modules/Share/constants/path'
 import RegisterForm from '../../components/RegisterForm'
-import { FormRegisterSchema, FormRegisterType } from '../../utils/rules'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { FormSignUpSchema, FormSignUpType } from '../../utils'
+import { SignUpCommandHandler } from '../../services'
 
 const RegisterPage = () => {
-  const {
-    register,
-    formState: { errors }
-  } = useForm<FormRegisterType>({
-    resolver: yupResolver(FormRegisterSchema)
+  const { control, handleSubmit } = useForm<FormSignUpType>({
+    resolver: yupResolver(FormSignUpSchema)
+  })
+
+  const signUpCommandHandler = new SignUpCommandHandler()
+
+  const handleSubmitForm = handleSubmit((data) => {
+    signUpCommandHandler.handler(
+      data,
+      () => {
+        console.log('success')
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    )
   })
   return (
     <Fragment>
@@ -24,8 +36,8 @@ const RegisterPage = () => {
         <Link to={path.home_page} className='text-[32px]'>
           Tourease
         </Link>
-        <form onSubmit={() => {}}>
-          <RegisterForm register={register} errors={errors} />
+        <form onSubmit={handleSubmitForm}>
+          <RegisterForm control={control} />
         </form>
         <Link to={path.login} className='flex justify-center text-[#757575] text-[14px] underline'>
           Already have an account?

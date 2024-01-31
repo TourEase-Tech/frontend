@@ -22,7 +22,7 @@ const InputAuthentication = ({
   register,
   id,
   name,
-  type = 'text',
+  type,
   label,
   placeholder,
   autoComplete,

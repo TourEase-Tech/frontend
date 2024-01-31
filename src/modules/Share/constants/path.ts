@@ -7,7 +7,6 @@ const path = {
   forget_password: '/forgetPassword',
   reset_password: '/resetPassword',
   //Admin
-  admin_login: '/admin/login',
   dashboard: '/admin/dashboard',
   user: '/admin/users'
 } as const

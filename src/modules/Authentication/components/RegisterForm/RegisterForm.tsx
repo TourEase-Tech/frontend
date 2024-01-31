@@ -1,187 +1,184 @@
 import { Fragment, useState } from 'react'
-import { FormRegisterType } from '../../utils/rules'
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import InputAuthentication from '../InputAuthentication'
+import { Control, Controller } from 'react-hook-form'
 import Button from 'src/modules/Share/components/Button'
+import { FormSignUpType } from '../../utils'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { FormControlLabel, IconButton, InputAdornment, Radio, RadioGroup, TextField } from '@mui/material'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import Visibility from '@mui/icons-material/Visibility'
 
 interface Props {
-  register: UseFormRegister<FormRegisterType>
-  errors: FieldErrors<FormRegisterType>
+  control: Control<FormSignUpType>
 }
-const RegisterForm = ({ register, errors }: Props) => {
+const RegisterForm = ({ control }: Props) => {
   const [isHiddenPassword, setIsHiddenPassword] = useState<boolean>(true)
 
+  const togglePasswordVisibility = () => {
+    setIsHiddenPassword(!isHiddenPassword)
+  }
   return (
     <Fragment>
       <div className='px-6 sm:px-8 sm:w-[520px] flex justify-center flex-col m-auto w-full'>
-        <div className='flex flex-col gap-2'>
-          <span>Email</span>
-          <InputAuthentication
-            register={register}
-            type='email'
-            id='email'
-            name='email'
-            placeholder='Provide your email address'
-            className='flex flex-col'
-            classNameInput='bg-transparent px-4 py-0 h-12 border border-solid border-[#e1e1e1] focus:outline-none '
-            error={errors.userNameOrEmail?.message}
-          />
-        </div>
-        <div className='flex flex-col gap-2'>
-          <span>Password</span>
-          <InputAuthentication
-            register={register}
-            type={isHiddenPassword ? 'password' : 'text'}
-            id='password'
-            name='password'
-            placeholder='Enter your password'
-            className='flex flex-col relative'
-            classNameInput='bg-transparent px-4 py-0 h-12 border border-solid border-[#e1e1e1] focus:outline-none '
-            error={errors.password?.message}
-          >
-            {isHiddenPassword ? (
-              <Button
-                type='button'
-                classNameButton='absolute right-[4px] top-[8px] cursor-pointer px-2 py-1'
-                onClick={() => setIsHiddenPassword(!isHiddenPassword)}
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='h-6 w-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88'
-                  />
-                </svg>
-              </Button>
-            ) : (
-              <Button
-                type='button'
-                classNameButton='absolute right-[4px] top-[8px] cursor-pointer px-2 py-1 '
-                onClick={() => setIsHiddenPassword(!isHiddenPassword)}
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='h-6 w-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z'
-                  />
-                  <path strokeLinecap='round' strokeLinejoin='round' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
-                </svg>
-              </Button>
-            )}
-          </InputAuthentication>
-        </div>
-        <div className='flex flex-col gap-2'>
-          <span>Confirm password</span>
-          <InputAuthentication
-            register={register}
-            type={isHiddenPassword ? 'password' : 'text'}
-            id='password'
-            name='password'
-            placeholder='Enter your confirm password'
-            className='flex flex-col relative'
-            classNameInput='bg-transparent px-4 py-0 h-12 border border-solid border-[#e1e1e1] focus:outline-none '
-            error={errors.confirmPassword?.message}
-          >
-            {isHiddenPassword ? (
-              <Button
-                type='button'
-                classNameButton='absolute right-[4px] top-[8px] cursor-pointer px-2 py-1'
-                onClick={() => setIsHiddenPassword(!isHiddenPassword)}
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='h-6 w-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88'
-                  />
-                </svg>
-              </Button>
-            ) : (
-              <Button
-                type='button'
-                classNameButton='absolute right-[4px] top-[8px] cursor-pointer px-2 py-1 '
-                onClick={() => setIsHiddenPassword(!isHiddenPassword)}
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='h-6 w-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z'
-                  />
-                  <path strokeLinecap='round' strokeLinejoin='round' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
-                </svg>
-              </Button>
-            )}
-          </InputAuthentication>
-        </div>
-        <div className='flex flex-col gap-2'>
-          <span>First name</span>
-          <InputAuthentication
-            register={register}
-            type='text'
-            id='firstName'
-            name='firstName'
-            placeholder='Provide your first name'
-            className='flex flex-col'
-            classNameInput='bg-transparent px-4 py-0 h-12 border border-solid border-[#e1e1e1] focus:outline-none '
-            error={errors.firstName?.message}
-          />
-        </div>
-        <div className='flex flex-col gap-2'>
-          <span>Last name</span>
-          <InputAuthentication
-            register={register}
-            type='text'
-            id='lastName'
-            name='lastName'
-            placeholder='Provide your last name'
-            className='flex flex-col'
-            classNameInput='bg-transparent px-4 py-0 h-12 border border-solid border-[#e1e1e1] focus:outline-none '
-            error={errors.lastName?.message}
-          />
-        </div>
-        <div className='flex flex-col gap-2'>
-          <span>Phone number</span>
-          <InputAuthentication
-            register={register}
-            type='number'
-            id='phoneNumber'
-            name='phoneNumber'
-            placeholder='Provide your phone number'
-            className='flex flex-col'
-            classNameInput='bg-transparent px-4 py-0 h-12 border border-solid border-[#e1e1e1] focus:outline-none '
-            error={errors.phone?.message}
-          />
-        </div>
+        <Controller
+          name='email'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='email'
+                  label='Email'
+                  placeholder='Provide your email'
+                  className='w-full bg-white'
+                  onChange={onChange}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='password'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='password'
+                  label='Password'
+                  placeholder='Provide your password'
+                  type={isHiddenPassword ? 'password' : 'text'} // Sử dụng type 'password' hoặc 'text' tùy thuộc vào trạng thái của isHiddenPassword
+                  className='w-full bg-white'
+                  onChange={onChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton onClick={togglePasswordVisibility} edge='end'>
+                          {isHiddenPassword ? <VisibilityOff /> : <Visibility />} {/* Icon hiển thị/ẩn mật khẩu */}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='confirm_password'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='confirm_password'
+                  label='Confirm password'
+                  placeholder='Provide your confirm password'
+                  type={isHiddenPassword ? 'password' : 'text'} // Sử dụng type 'password' hoặc 'text' tùy thuộc vào trạng thái của isHiddenPassword
+                  className='w-full bg-white'
+                  onChange={onChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position='end'>
+                        <IconButton onClick={togglePasswordVisibility} edge='end'>
+                          {isHiddenPassword ? <VisibilityOff /> : <Visibility />} {/* Icon hiển thị/ẩn mật khẩu */}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='firstname'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='firstname'
+                  label='First name'
+                  placeholder='Provide your firstname'
+                  className='w-full bg-white'
+                  onChange={onChange}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='lastname'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='lastname'
+                  label='Last name'
+                  placeholder='Provide your lastname'
+                  className='w-full bg-white'
+                  onChange={onChange}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='gender'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <RadioGroup aria-label='gender' name='gender' onChange={onChange} row>
+                <FormControlLabel value={true} control={<Radio />} label='Female' />
+                <FormControlLabel value={false} control={<Radio />} label='Male' />
+              </RadioGroup>
+              <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='phonenumber'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='phonenumber'
+                  label='Phonenumber'
+                  placeholder='Provide your phonenumber'
+                  className='w-full bg-white'
+                  onChange={onChange}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
+        <Controller
+          name='address'
+          control={control}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+              <div>
+                <TextField
+                  id='address'
+                  label='Address'
+                  placeholder='Provide your address'
+                  className='w-full bg-white'
+                  onChange={onChange}
+                />
+                <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
+              </div>
+            </LocalizationProvider>
+          )}
+        />
         <Button
           type='submit'
           classNameButton='bg-[#00c1fe] text-[#000000] border border-solid border-[#00c1fe] mb-6 flex justify-center items-center text-[14px] text-center h-[55px] font-bold'

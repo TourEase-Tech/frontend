@@ -1,17 +1,36 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Helmet } from 'react-helmet-async'
 import LoginForm from '../../components/LoginForm'
 import { useForm } from 'react-hook-form'
-import { FormLoginSchema, FormLoginType } from '../../utils/rules'
-import { Link } from 'react-router-dom'
+import { FormSignInSchema, FormSignInType } from '../../utils'
+import { Link, useNavigate } from 'react-router-dom'
 import path from 'src/modules/Share/constants/path'
+import { SignInCommandHandler } from '../../services'
+import { AppContext } from 'src/modules/Share/contexts'
+
 const LoginPage = () => {
-  const {
-    register,
-    formState: { errors }
-  } = useForm<FormLoginType>({
-    resolver: yupResolver(FormLoginSchema)
+  const { setIsAuthenticated } = useContext(AppContext)
+
+  const navigate = useNavigate()
+
+  const { control, handleSubmit } = useForm<FormSignInType>({
+    resolver: yupResolver(FormSignInSchema)
+  })
+
+  const signInCommandHandler = new SignInCommandHandler()
+
+  const handleSubmitForm = handleSubmit((data) => {
+    signInCommandHandler.handler(
+      data,
+      () => {
+        setIsAuthenticated(true)
+        navigate(path.home_page)
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    )
   })
   return (
     <Fragment>
@@ -23,8 +42,8 @@ const LoginPage = () => {
         <Link to={path.home_page} className='text-[32px]'>
           Tourease
         </Link>
-        <form onSubmit={() => {}}>
-          <LoginForm register={register} errors={errors} />
+        <form onSubmit={handleSubmitForm}>
+          <LoginForm control={control} />
         </form>
         <Link to={path.forget_password} className='flex justify-center text-[#757575] text-[14px] underline'>
           Reset Password
