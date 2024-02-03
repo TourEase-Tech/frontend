@@ -11,9 +11,10 @@ import 'dayjs/locale/de'
 
 interface Props {
   control: Control<FormSignInType>
+  isLoading: boolean
 }
 
-const LoginForm = ({ control }: Props) => {
+const LoginForm = ({ control, isLoading }: Props) => {
   const [isHiddenPassword, setIsHiddenPassword] = useState<boolean>(true)
 
   const togglePasswordVisibility = () => {
@@ -72,6 +73,7 @@ const LoginForm = ({ control }: Props) => {
         <Button
           type='submit'
           classNameButton='bg-[#00c1fe] text-[#000000] border border-solid border-[#00c1fe] mb-6 flex justify-center items-center text-[14px] text-center h-[55px] font-bold'
+          isLoading={isLoading}
         >
           Login
         </Button>

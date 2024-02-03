@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
-import { FormSignInType } from '../../utils'
 import authServices from './auth.services'
+import { FormSignInType } from '../../utils'
 
 class SignInCommandHandler {
   private _signInMutation
@@ -9,15 +9,20 @@ class SignInCommandHandler {
       mutationFn: (body: FormSignInType) => authServices.signIn(body)
     })
   }
-  handler = (data: FormSignInType, handlerSuccess: any, handlerError: any) => {
+
+  handle = (data: FormSignInType, handleSuccess: any, handleError: any) => {
     return this._signInMutation.mutate(data, {
       onSuccess: () => {
-        handlerSuccess()
+        handleSuccess()
       },
       onError: (error: any) => {
-        handlerError(error)
+        handleError(error)
       }
     })
+  }
+
+  isLoading() {
+    return this._signInMutation.isPending
   }
 }
 

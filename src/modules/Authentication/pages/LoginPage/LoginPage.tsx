@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import path from 'src/modules/Share/constants/path'
 import { SignInCommandHandler } from '../../services'
 import { AppContext } from 'src/modules/Share/contexts'
-
+import { toast } from 'react-toastify'
 const LoginPage = () => {
   const { setIsAuthenticated } = useContext(AppContext)
 
@@ -21,14 +21,15 @@ const LoginPage = () => {
   const signInCommandHandler = new SignInCommandHandler()
 
   const handleSubmitForm = handleSubmit((data) => {
-    signInCommandHandler.handler(
+    signInCommandHandler.handle(
       data,
       () => {
         setIsAuthenticated(true)
-        navigate(path.home_page)
+        navigate(path.dashboard)
+        toast.success('Login successful')
       },
       (error: any) => {
-        console.log(error)
+        toast.error(error.response.data.message)
       }
     )
   })
@@ -39,11 +40,11 @@ const LoginPage = () => {
         <meta name='description' content='This is login page of the project' />
       </Helmet>
       <div className='flex flex-col justify-center items-center m-auto w-full sm:w-[520px]  px-6 h-full border mt-10 bg-white rounded-2xl py-10'>
-        <Link to={path.home_page} className='text-[32px]'>
+        <Link to={path.home_page} className='text-[32px] mb-10'>
           Tourease
         </Link>
         <form onSubmit={handleSubmitForm}>
-          <LoginForm control={control} />
+          <LoginForm control={control} isLoading={signInCommandHandler.isLoading()} />
         </form>
         <Link to={path.forget_password} className='flex justify-center text-[#757575] text-[14px] underline'>
           Reset Password

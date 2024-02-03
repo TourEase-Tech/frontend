@@ -17,7 +17,6 @@ export const AppContext = createContext<AppContextType>(initialAppContext)
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialAppContext.isAuthenticated)
-
   const reset = () => {
     setIsAuthenticated(false)
   }

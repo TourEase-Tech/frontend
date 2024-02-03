@@ -19,5 +19,9 @@ class SignUpCommandHandler {
       }
     })
   }
+
+  isLoading() {
+    return this._signUpMutation.isPending
+  }
 }
 export { SignUpCommandHandler }

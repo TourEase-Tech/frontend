@@ -8,7 +8,8 @@ const path = {
   reset_password: '/resetPassword',
   //Admin
   dashboard: '/admin/dashboard',
-  user: '/admin/users'
+  user: '/admin/users',
+  tour: '/admin/tours'
 } as const
 
 export default path

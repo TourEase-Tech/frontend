@@ -10,8 +10,9 @@ import Visibility from '@mui/icons-material/Visibility'
 
 interface Props {
   control: Control<FormSignUpType>
+  isLoading: boolean
 }
-const RegisterForm = ({ control }: Props) => {
+const RegisterForm = ({ control, isLoading }: Props) => {
   const [isHiddenPassword, setIsHiddenPassword] = useState<boolean>(true)
 
   const togglePasswordVisibility = () => {
@@ -136,8 +137,8 @@ const RegisterForm = ({ control }: Props) => {
           render={({ field: { onChange }, fieldState: { error } }) => (
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
               <RadioGroup aria-label='gender' name='gender' onChange={onChange} row>
-                <FormControlLabel value={true} control={<Radio />} label='Female' />
-                <FormControlLabel value={false} control={<Radio />} label='Male' />
+                <FormControlLabel value={false} control={<Radio />} label='Female' />
+                <FormControlLabel value={true} control={<Radio />} label='Male' />
               </RadioGroup>
               <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
             </LocalizationProvider>
@@ -182,6 +183,7 @@ const RegisterForm = ({ control }: Props) => {
         <Button
           type='submit'
           classNameButton='bg-[#00c1fe] text-[#000000] border border-solid border-[#00c1fe] mb-6 flex justify-center items-center text-[14px] text-center h-[55px] font-bold'
+          isLoading={isLoading}
         >
           Submit
         </Button>
