@@ -28,7 +28,7 @@ class EditProfileCommandHandler {
   }
 
   isLoading() {
-    return this._editProfileMutation.isPending
+    return this._editProfileMutation.isLoading
   }
 }
 

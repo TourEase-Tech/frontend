@@ -22,7 +22,7 @@ class SignInCommandHandler {
   }
 
   isLoading() {
-    return this._signInMutation.isPending
+    return this._signInMutation.isLoading
   }
 }
 

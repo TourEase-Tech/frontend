@@ -15,6 +15,7 @@ const ForgetPasswordPage = lazy(() => import('src/modules/Authentication/pages/F
 // Admin
 const DashboardPage = lazy(() => import('src/modules/Dashboard/pages/DashboardPage'))
 const UserPage = lazy(() => import('src/modules/UserManagement/pages/UserPage'))
+const TourPage = lazy(() => import('src/modules/TourManagement/pages/TourPage'))
 const NotFound = lazy(() => import('src/modules/Share/components/NotFound'))
 
 const RejectedRoute = () => {
@@ -125,6 +126,16 @@ const useRouteElements = () => {
             <MainLayout>
               <Suspense>
                 <UserPage />
+              </Suspense>
+            </MainLayout>
+          )
+        },
+        {
+          path: path.tour,
+          element: (
+            <MainLayout>
+              <Suspense>
+                <TourPage />
               </Suspense>
             </MainLayout>
           )
