@@ -9,7 +9,9 @@ const path = {
   //Admin
   dashboard: '/admin/dashboard',
   user: '/admin/users',
-  tour: '/admin/tours'
+  tour: '/admin/tours',
+  create_tour: '/admin/tours/create',
+  edit_tour: '/admin/tours/edit'
 } as const
 
 export default path

@@ -3,4 +3,5 @@ export interface TourListConfig {
   sort?: string
   page?: number
   limit?: number
+  id?: string
 }

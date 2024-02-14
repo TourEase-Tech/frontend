@@ -16,6 +16,8 @@ const ForgetPasswordPage = lazy(() => import('src/modules/Authentication/pages/F
 const DashboardPage = lazy(() => import('src/modules/Dashboard/pages/DashboardPage'))
 const UserPage = lazy(() => import('src/modules/UserManagement/pages/UserPage'))
 const TourPage = lazy(() => import('src/modules/TourManagement/pages/TourPage'))
+const TourDetailPage = lazy(() => import('src/modules/TourManagement/pages/TourDetailPage'))
+const CreateTourPage = lazy(() => import('src/modules/TourManagement/pages/CreateTourPage'))
 const NotFound = lazy(() => import('src/modules/Share/components/NotFound'))
 
 const RejectedRoute = () => {
@@ -136,6 +138,26 @@ const useRouteElements = () => {
             <MainLayout>
               <Suspense>
                 <TourPage />
+              </Suspense>
+            </MainLayout>
+          )
+        },
+        {
+          path: path.create_tour,
+          element: (
+            <MainLayout>
+              <Suspense>
+                <CreateTourPage />
+              </Suspense>
+            </MainLayout>
+          )
+        },
+        {
+          path: path.edit_tour,
+          element: (
+            <MainLayout>
+              <Suspense>
+                <TourDetailPage />
               </Suspense>
             </MainLayout>
           )

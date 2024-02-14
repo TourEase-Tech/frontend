@@ -23,3 +23,14 @@ export interface DataTourType {
   numLikes: number
   id: string
 }
+
+export interface FormTour {
+  name: string
+  description: string
+  price: string
+  departureLocation: string
+  period: string
+  destination: string
+  departureDay: string
+  images: (string | undefined)[]
+}

@@ -1,16 +1,16 @@
 import HeaderTable from 'src/modules/Share/components/HeaderTable'
 import { ToursListType } from '../../interfaces'
-import { Avatar } from '@mui/material'
 import Skeleton from 'react-loading-skeleton'
 import { TourTableHeader } from '../../constants'
 import { formatDateTimeVN } from 'src/modules/Share/utils'
 
 interface Props {
   tours: ToursListType
+  onEditTour: (id: string) => void
   onSort: (column: string) => void
   isLoading: boolean
 }
-const TourTable = ({ tours, isLoading, onSort }: Props) => {
+const TourTable = ({ tours, onEditTour, isLoading, onSort }: Props) => {
   return (
     <div>
       <table className='w-full bg-white text-left border-[1px] border-gray-200 p-2'>
@@ -46,11 +46,10 @@ const TourTable = ({ tours, isLoading, onSort }: Props) => {
                 <tr
                   className='text-[14px] text-gray-600 border-b-[1px] border-gray-200 cursor-pointer hover:bg-gray-50'
                   key={tour.id}
-                  onClick={() => {}}
+                  onClick={() => onEditTour(tour.id)}
                 >
-                  <th className='px-2 py-4 font-medium w-[80%] flex gap-5 items-center'>
-                    <Avatar />
-                    <span className='line-clamp-2'>{tour.name}</span>
+                  <th className='px-2 py-4 font-medium w-[30%] text-center'>
+                    <span className='line-clamp-2 '>{tour.name}</span>
                   </th>
                   <th className='px-2 py-4 font-medium w-[17%] text-center'>{tour.departureLocation}</th>
                   <th className='px-2 py-4 font-medium w-[17%] text-center'>{tour.destination}</th>

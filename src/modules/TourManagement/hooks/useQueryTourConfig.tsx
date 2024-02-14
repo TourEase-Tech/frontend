@@ -13,7 +13,8 @@ const useQueryTourConfig = () => {
       search: queryTourParams.fields,
       sort: queryTourParams.sort,
       limit: queryTourParams.limit || 10,
-      page: queryTourParams.page || 1
+      page: queryTourParams.page || 1,
+      id: queryTourParams.id
     },
     isUndefined
   )

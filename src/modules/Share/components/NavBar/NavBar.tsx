@@ -2,7 +2,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import Button from '../Button'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Popover } from '@mui/material'
 import { AppContext } from '../../contexts'
 import { clearTokenFromLocalStorage } from 'src/modules/Authentication/utils/auth'
@@ -11,7 +11,21 @@ import path from '../../constants/path'
 import ModalCustom from '../ModelCustom'
 import EditProfile from '../EditProfile'
 import ChangePassword from '../ChangePassword'
+import classNames from 'classnames'
 const NavBar = () => {
+  const [hasScrolled, setHasScrolled] = useState<boolean>(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      setHasScrolled(scrollTop > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   const { setIsAuthenticated } = useContext(AppContext)
 
   const navigate = useNavigate()
@@ -55,7 +69,14 @@ const NavBar = () => {
   const id = isOpen ? 'popover' : undefined
 
   return (
-    <div className='sticky left-auto right-0 grid px-0 rounded-2xl w-full min-h-[20px] transition-all top-0 '>
+    <header
+      className={classNames(
+        'sticky left-auto right-0 grid px-0 rounded-2xl w-full min-h-[20px] transition-all top-0 ',
+        {
+          'shadow-bottom shadow-xl bg-white': hasScrolled
+        }
+      )}
+    >
       <div className='py-3 px-4 flex justify-between items-center flex-row relative'>
         <div className='flex items-center justify-stretch w-max'>
           <div className='text-[#344767]'>
@@ -137,10 +158,10 @@ const NavBar = () => {
           <EditProfile handleCloseModal={handleCloseModelProfile} />
         </ModalCustom>
         <ModalCustom isOpenModal={isOpenModalChangePassword} handleClose={handleCloseModelChangePassword}>
-          <ChangePassword />
+          <ChangePassword handleCloseModal={handleCloseModelChangePassword} />
         </ModalCustom>
       </div>
-    </div>
+    </header>
   )
 }
 
