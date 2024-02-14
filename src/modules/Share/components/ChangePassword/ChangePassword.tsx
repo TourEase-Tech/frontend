@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import _ from 'lodash'
 import { FormChangePasswordSchema, FormChangePasswordType } from '../../utils'
-import { IconButton, Input, InputAdornment, TextField } from '@mui/material'
+import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
@@ -22,11 +22,7 @@ const ChangePassword = ({ handleCloseModal }: Props) => {
     setIsHiddenPassword(!isHiddenPassword)
   }
 
-  const {
-    register,
-    control,
-    formState: { errors }
-  } = useForm<FormChangePasswordType>({
+  const { control } = useForm<FormChangePasswordType>({
     resolver: yupResolver(FormChangePasswordSchema)
   })
 

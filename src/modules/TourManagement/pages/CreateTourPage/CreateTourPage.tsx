@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { FormTourSchema, FormTourType } from '../../utils'
@@ -22,10 +22,7 @@ const CreateTourPage = () => {
     register,
     control,
     handleSubmit,
-    setError,
-    getValues,
     setValue,
-    watch,
     formState: { errors }
   } = useForm<FormTourType>({
     resolver: yupResolver(FormTourSchema)

@@ -26,11 +26,7 @@ const TourDetailPage = () => {
   const {
     register,
     control,
-    handleSubmit,
-    setError,
-    getValues,
     setValue,
-    watch,
     formState: { errors }
   } = useForm<FormTourType>({
     resolver: yupResolver(FormTourSchema)

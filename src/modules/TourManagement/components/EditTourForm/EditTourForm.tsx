@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from 'react-router-dom'
 import { Fragment, useEffect } from 'react'
 import { Control, Controller, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { FormTourType } from '../../utils'
