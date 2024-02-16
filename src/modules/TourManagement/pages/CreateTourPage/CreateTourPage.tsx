@@ -8,6 +8,7 @@ import { CreateTourCommandHandler } from '../../services'
 import Button from 'src/modules/Share/components/Button'
 import { useNavigate } from 'react-router-dom'
 import path from 'src/modules/Share/constants/path'
+import { toast } from 'react-toastify'
 
 const CreateTourPage = () => {
   const [file, setFile] = useState<File>()
@@ -30,7 +31,7 @@ const CreateTourPage = () => {
 
   const handleChangeFile = async (file?: File) => {
     setFile(file)
-    setValue('images', [])
+    setValue('images', '')
     try {
       const formData = new FormData()
       formData.append('file', file as Blob)
@@ -42,7 +43,7 @@ const CreateTourPage = () => {
       })
       if (response.ok) {
         const data = await response.json()
-        setValue('images', [data.secure_url])
+        setValue('images', data.secure_url)
       } else {
         console.log('Failed to uploading file: ' + response.statusText)
       }
@@ -57,10 +58,10 @@ const CreateTourPage = () => {
     createTourCommandHandler.handle(
       data,
       () => {
-        console.log('Create tour successfully')
+        navigate(path.tour), toast.success('Create tour successfully')
       },
       (error: any) => {
-        console.log('Create tour failed: ' + error)
+        toast.error('Create tour failed: ' + error.message)
       }
     )
   })

@@ -16,7 +16,6 @@ const TourPage = () => {
   const getAllToursQuery = new GetAllToursQuery()
   const tours = getAllToursQuery.fetch()
   const total = getAllToursQuery.getTotal()
-  console.log(tours)
 
   const onEditTour = (id: string) => {
     navigate(

@@ -25,7 +25,7 @@ export const FormTourSchema = yup.object({
       const minStartDate = new Date(now.getTime() + 24 * 60 * 60 * 1000)
       return startDate > minStartDate
     }),
-  images: yup.array().of(yup.string()).required('At least one image is required')
+  images: yup.string().required('Image is required')
 })
 
 export type FormTourType = yup.InferType<typeof FormTourSchema>

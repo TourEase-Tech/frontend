@@ -16,7 +16,7 @@ export interface DataTourType {
   price: string
   departureLocation: string
   period: string
-  images: never[]
+  images: string
   destination: string
   departureDay: string
   createdAt: string
@@ -25,6 +25,7 @@ export interface DataTourType {
 }
 
 export interface FormTour {
+  id?: string
   name: string
   description: string
   price: string
@@ -32,5 +33,5 @@ export interface FormTour {
   period: string
   destination: string
   departureDay: string
-  images: (string | undefined)[]
+  images: string
 }

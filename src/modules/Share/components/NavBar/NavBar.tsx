@@ -6,12 +6,13 @@ import { useContext, useEffect, useState } from 'react'
 import { Popover } from '@mui/material'
 import { AppContext } from '../../contexts'
 import { clearTokenFromLocalStorage } from 'src/modules/Authentication/utils/auth'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import path from '../../constants/path'
 import ModalCustom from '../ModelCustom'
 import EditProfile from '../EditProfile'
 import ChangePassword from '../ChangePassword'
 import classNames from 'classnames'
+import { HandleHeading } from '../../constants'
 const NavBar = () => {
   const [hasScrolled, setHasScrolled] = useState<boolean>(false)
 
@@ -29,6 +30,7 @@ const NavBar = () => {
   const { setIsAuthenticated } = useContext(AppContext)
 
   const navigate = useNavigate()
+  const location = useLocation().pathname.split('/').slice(2)
 
   const [isOpenModalChangePassword, setIsOpenModalChangePassword] = useState<boolean>(false)
   const [isOpenModalProfile, setIsOpenModalProfile] = useState<boolean>(false)
@@ -83,11 +85,8 @@ const NavBar = () => {
             <nav className='text-base font-normal flex items-center gap-4 '>
               <HomeIcon className='w-4 h-4' />
               <span>/</span>
-              <span>Dashboard</span>
+              <span>{HandleHeading(location[0])}</span>
             </nav>
-            <h6 className='text-ellipsis whitespace-nowrap text-base overflow-hidden capitalize font-bold'>
-              Dashboard
-            </h6>
           </div>
         </div>
         <div className='flex items-center justify-center gap-4'>

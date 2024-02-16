@@ -107,6 +107,7 @@ const EditTourForm = ({ register, previewImage, onChange, errors, setValue, cont
           <Controller
             name='price'
             control={control}
+            defaultValue=''
             render={({ field: { onChange, value = tour && tour.price }, fieldState: { error } }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <div className='pt-[8px]'>
@@ -148,6 +149,7 @@ const EditTourForm = ({ register, previewImage, onChange, errors, setValue, cont
           />
           <Controller
             name='description'
+            defaultValue=''
             control={control}
             render={({ field: { onChange, value = tour && tour.description }, fieldState: { error } }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>

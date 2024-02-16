@@ -3,12 +3,13 @@ import { Helmet } from 'react-helmet-async'
 import EditTourForm from '../../components/EditTourForm'
 import Button from 'src/modules/Share/components/Button'
 import path from 'src/modules/Share/constants/path'
-import { useNavigate } from 'react-router-dom'
+import { createSearchParams, useLocation, useNavigate } from 'react-router-dom'
 import useQueryTourConfig from '../../hooks/useQueryTourConfig'
-import { GetTourByIdQuery } from '../../services'
+import { EditTourCommandHandler, GetTourByIdQuery } from '../../services'
 import { useForm } from 'react-hook-form'
 import { FormTourSchema, FormTourType } from '../../utils'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { toast } from 'react-toastify'
 
 const TourDetailPage = () => {
   const [file, setFile] = useState<File>()
@@ -17,14 +18,36 @@ const TourDetailPage = () => {
     return file ? URL.createObjectURL(file) : ''
   }, [file])
 
-  const handleChangeFile = (file?: File) => {
+  const handleChangeFile = async (file?: File) => {
     setFile(file)
+    setValue('images', '')
+    try {
+      const formData = new FormData()
+      formData.append('file', file as Blob)
+      formData.append('upload_preset', 'uploadImage')
+
+      const response = await fetch(`https://api.cloudinary.com/v1_1/dz1kgngrn/image/upload`, {
+        method: 'POST',
+        body: formData
+      })
+      if (response.ok) {
+        const data = await response.json()
+        setValue('images', data.secure_url)
+      } else {
+        console.log('Failed to uploading file: ' + response.statusText)
+      }
+    } catch (error) {
+      console.log('Failed to uploading file: ' + error)
+    }
   }
 
   const navigate = useNavigate()
+  const location = useLocation()
 
+  const prevTourConfig = location.state
   const {
     register,
+    handleSubmit,
     control,
     setValue,
     formState: { errors }
@@ -36,18 +59,36 @@ const TourDetailPage = () => {
   const getTourByIdQuery = new GetTourByIdQuery(queryTourConfig.id as string)
   const tour = getTourByIdQuery.fetch()
 
+  const editTourCommandHandler = new EditTourCommandHandler()
+
+  const handleSubmitForm = handleSubmit(async (data) => {
+    editTourCommandHandler.handle(
+      {
+        ...data,
+        id: queryTourConfig.id as string
+      },
+      () => {
+        toast.success('Tour updated successfully')
+      },
+      () => {
+        toast.error('Update tour failed')
+      }
+    )
+  })
   const handleCancel = () => {
     navigate({
-      pathname: path.tour
+      pathname: path.tour,
+      search: createSearchParams(prevTourConfig).toString()
     })
   }
+
   return (
     <Fragment>
       <Helmet>
         <title>Edit Tour</title>
         <meta name='description' content='This is edit tour page of the project' />
       </Helmet>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmitForm}>
         <EditTourForm
           register={register}
           previewImage={previewImage}
@@ -66,8 +107,9 @@ const TourDetailPage = () => {
             Cancel
           </Button>
           <Button
-            classNameButton='bg-[#26C6DA] py-2 px-4 rounded-lg text-[14px] text-white font-semibold mt-6 w-[90px]'
+            classNameButton='bg-[#26C6DA] py-2 px-4 rounded-lg text-[14px] text-white font-semibold mt-6 w-[100px]'
             type='submit'
+            isLoading={editTourCommandHandler.isLoading()}
           >
             Save
           </Button>

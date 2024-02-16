@@ -1,3 +1,5 @@
 export * from './HomeContainer'
 export * from './HomeFooter'
 export * from './HomeHeader'
+export * from './ListTour'
+export * from './CardTour'

@@ -37,22 +37,23 @@ const HomeHeader = ({ profile }: Props) => {
   const id = isOpen ? 'popover' : undefined
 
   return (
-    <div className='w-full transition-none top-0 bg-transparent sticky flex px-20'>
+    <div className='w-full transition-none top-0 bg-[#a1c19c]/90 sticky flex px-20 '>
       <div className='w-full h-full m-auto'>
-        <div className='flex justify-between relative items-center sm:pb-4  py-0 h-full'>
+        <div className='flex justify-between relative items-center py-0 h-full'>
           <Link to={path.home_page} className='text-inherit flex items-center justify-center'>
             <img className='w-28 h-28' src={logo} alt='' />
             <h1 className='text-[24px] font-semibold text-white'>Tourease</h1>
           </Link>
           <div className='flex items-center justify-between gap-8'>
-            <ul className='lg:flex lg:items-center list-none font-semibold  '>
+            <ul className='flex lg:items-center list-none font-semibold  '>
               <NavLink
                 to={path.home_page}
                 className={({ isActive }) =>
                   classNames(
-                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px] text-white',
+                    'cursor-pointer transition-all relative hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px] ',
                     {
-                      'text-[#4c4c4c]': isActive
+                      'text-[#4c4c4c]': isActive,
+                      'text-white': !isActive
                     }
                   )
                 }
@@ -60,12 +61,13 @@ const HomeHeader = ({ profile }: Props) => {
                 Home
               </NavLink>
               <NavLink
-                to={'/tour'}
+                to={path.tour_client}
                 className={({ isActive }) =>
                   classNames(
-                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px]  text-white',
+                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px] ',
                     {
-                      'text-[#4c4c4c]': isActive
+                      'text-[#4c4c4c]': isActive,
+                      'text-white': !isActive
                     }
                   )
                 }
@@ -73,12 +75,13 @@ const HomeHeader = ({ profile }: Props) => {
                 Tour
               </NavLink>
               <NavLink
-                to={'/things'}
+                to={'/things-to-do'}
                 className={({ isActive }) =>
                   classNames(
-                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px] text-white',
+                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px]',
                     {
-                      'text-[#4c4c4c]': isActive
+                      'text-[#4c4c4c]': isActive,
+                      'text-white': !isActive
                     }
                   )
                 }
@@ -89,9 +92,10 @@ const HomeHeader = ({ profile }: Props) => {
                 to={'/plan'}
                 className={({ isActive }) =>
                   classNames(
-                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px] text-white',
+                    'cursor-pointer transition-all hover:text-[#4c4c4c] duration-300 flex-shrink-0 md:pt-[18px] md:pr-[7px] md:pb-[18px] md:pl-0 lg:py-[10px] lg:px-[14px]',
                     {
-                      'text-[#4c4c4c]': isActive
+                      'text-[#4c4c4c]': isActive,
+                      'text-white': !isActive
                     }
                   )
                 }

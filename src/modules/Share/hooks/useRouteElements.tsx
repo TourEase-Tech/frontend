@@ -11,7 +11,8 @@ const HomePage = lazy(() => import('src/modules/Landingpage/pages/HomePage'))
 const LoginPage = lazy(() => import('src/modules/Authentication/pages/LoginPage'))
 const RegisterPage = lazy(() => import('src/modules/Authentication/pages/RegisterPage'))
 const ForgetPasswordPage = lazy(() => import('src/modules/Authentication/pages/ForgetPasswordPage'))
-
+const TourClientPage = lazy(() => import('src/modules/Landingpage/pages/TourClientPage'))
+const TourClientDetailPage = lazy(() => import('src/modules/Landingpage/pages/TourClientDetailPage'))
 // Admin
 const DashboardPage = lazy(() => import('src/modules/Dashboard/pages/DashboardPage'))
 const UserPage = lazy(() => import('src/modules/UserManagement/pages/UserPage'))
@@ -101,6 +102,26 @@ const useRouteElements = () => {
             <HomeLayout>
               <Suspense>
                 <HomePage />
+              </Suspense>
+            </HomeLayout>
+          )
+        },
+        {
+          path: path.tour_client,
+          element: (
+            <HomeLayout>
+              <Suspense>
+                <TourClientPage />
+              </Suspense>
+            </HomeLayout>
+          )
+        },
+        {
+          path: path.tour_detail,
+          element: (
+            <HomeLayout>
+              <Suspense>
+                <TourClientDetailPage />
               </Suspense>
             </HomeLayout>
           )

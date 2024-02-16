@@ -1,6 +1,8 @@
 const path = {
   //Client
   home_page: '/',
+  tour_client: '/tours',
+  tour_detail: '/tours/detail',
   login: '/login',
   register: '/register',
   //Auth
