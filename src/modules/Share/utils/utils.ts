@@ -12,5 +12,5 @@ export function isAxiosUnauthorizedError(error: unknown): error is AxiosError {
   return isAxiosError(error) && error.response?.status === HttpStatusCode.Unauthorized
 }
 export function formatDateTimeVN(dateTime: string) {
-  return moment(dateTime).add(7, 'hours').format('HH:mm DD/MM/YYYY')
+  return moment(dateTime).add(0, 'hours').format('HH:mm DD/MM/YYYY')
 }

@@ -5,3 +5,4 @@ export interface TourListConfig {
   limit?: number
   id?: string
 }
+

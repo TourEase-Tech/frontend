@@ -8,7 +8,7 @@ export type QueryTourConfig = {
 
 const useQueryTourConfig = () => {
   const queryTourParams: QueryTourConfig = useQueryParams()
-  const queryEventConfig: QueryTourConfig = omitBy(
+  const queryTourConfig: QueryTourConfig = omitBy(
     {
       search: queryTourParams.fields,
       sort: queryTourParams.sort,
@@ -18,7 +18,7 @@ const useQueryTourConfig = () => {
     },
     isUndefined
   )
-  return queryEventConfig
+  return queryTourConfig
 }
 
 export default useQueryTourConfig

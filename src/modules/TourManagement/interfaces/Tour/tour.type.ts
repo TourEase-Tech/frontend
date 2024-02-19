@@ -22,6 +22,7 @@ export interface DataTourType {
   createdAt: string
   numLikes: number
   id: string
+  isLiked: boolean
 }
 
 export interface FormTour {
