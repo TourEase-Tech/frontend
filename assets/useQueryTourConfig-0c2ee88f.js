@@ -1,1 +1,0 @@
-import"./index-95684872.js";import{l as o}from"./lodash-004f3237.js";import{u as s}from"./useQueryParam-40f19588.js";const a=()=>{const r=s();return o.omitBy({search:r.fields,sort:r.sort,limit:r.limit||10,page:r.page||1,id:r.id},o.isUndefined)};export{a as u};

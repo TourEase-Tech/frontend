@@ -1,1 +1,0 @@
-import{m as r}from"./index-95684872.js";const e={getAllTours:t=>r.get("v1/tours/getAllTours",{params:t}),getDetailTour:t=>r.get(`v1/tours/getDetailTour/${t}`),createTour:t=>r.post("v1/tours/createTour",t),editTour:t=>r.patch("v1/tours/updateTour",t)};export{e as t};
