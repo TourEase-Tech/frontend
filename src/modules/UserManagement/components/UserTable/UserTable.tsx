@@ -1,8 +1,7 @@
 import HeaderTable from 'src/modules/Share/components/HeaderTable/HeaderTable'
 import { StatusToMessage, UserTableHeader } from '../../constants'
 import { DataUserType, UsersListType } from '../../interfaces'
-import Skeleton from 'react-loading-skeleton'
-import { Avatar } from '@mui/material'
+import { Avatar, Skeleton } from '@mui/material'
 import { useState } from 'react'
 import ModalCustom from 'src/modules/Share/components/ModelCustom'
 import UserDetail from '../UserDetail'
@@ -68,16 +67,16 @@ const UserTable = ({ users, onSort, isLoading }: Props) => {
                     key={index}
                   >
                     <th className='px-2 py-4 font-medium w-[40%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
                     </th>
                     <th className='px-2 py-4 font-medium w-[20%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
                     </th>
                     <th className='px-2 py-4 font-medium w-[20%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
                     </th>
                     <th className='px-2 py-4 font-medium w-[20%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
                     </th>
                   </tr>
                 ))
@@ -89,7 +88,7 @@ const UserTable = ({ users, onSort, isLoading }: Props) => {
                   onClick={() => handleOpenModal(user)}
                 >
                   <th className='px-2 py-4 font-medium w-[40%] flex gap-2'>
-                    <Avatar {...stringAvatar(`${user.firstname}`)} />
+                    <Avatar {...stringAvatar(`${user.firstname}`)} className='z-10' />
                     <div className='flex flex-col'>
                       <span>
                         {user.firstname} {user.lastname}

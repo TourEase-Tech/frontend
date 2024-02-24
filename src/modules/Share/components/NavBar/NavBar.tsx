@@ -73,7 +73,7 @@ const NavBar = () => {
   return (
     <header
       className={classNames(
-        'sticky left-auto right-0 grid px-0 rounded-2xl w-full min-h-[20px] transition-all top-0 ',
+        'sticky left-auto right-0 grid px-0 rounded-2xl w-full min-h-[20px] transition-all top-0 z-50',
         {
           'shadow-bottom shadow-xl bg-white': hasScrolled
         }

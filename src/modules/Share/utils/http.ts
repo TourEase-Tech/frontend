@@ -1,7 +1,13 @@
 import axios, { type AxiosInstance } from 'axios'
 import connect from '../constants/connect'
-import { getAccessTokenFromLocalStorage, setAccessTokenToLocalStorage } from 'src/modules/Authentication/utils/auth'
+import {
+  clearTokenFromLocalStorage,
+  getAccessTokenFromLocalStorage,
+  setAccessTokenToLocalStorage
+} from 'src/modules/Authentication/utils/auth'
 import { AuthResponse } from 'src/modules/Authentication/interfaces'
+import { isAxiosUnauthorizedError } from './utils'
+import { toast } from 'react-toastify'
 
 class Http {
   instance: AxiosInstance
@@ -16,6 +22,7 @@ class Http {
       },
       withCredentials: true
     })
+
     // add a response interceptor
     this.instance.interceptors.request.use(
       (config) => {
@@ -29,14 +36,26 @@ class Http {
         return Promise.reject(error)
       }
     )
-    this.instance.interceptors.response.use((response) => {
-      const { url } = response.config
-      if (url == 'v1/users/login') {
-        this.accessToken = (response.data as AuthResponse).token
-        setAccessTokenToLocalStorage(this.accessToken)
+
+    this.instance.interceptors.response.use(
+      (response) => {
+        const { url } = response.config
+        if (url == 'v1/users/login') {
+          this.accessToken = (response.data as AuthResponse).token
+          setAccessTokenToLocalStorage(this.accessToken)
+        }
+        return response
+      },
+      async (error: any) => {
+        if (isAxiosUnauthorizedError(error)) {
+          clearTokenFromLocalStorage()
+          toast.error('Token expired. Please log in again.')
+        } else {
+          toast.error('An error occurred. Please try again later.')
+        }
+        return Promise.reject(error)
       }
-      return response
-    })
+    )
   }
 }
 

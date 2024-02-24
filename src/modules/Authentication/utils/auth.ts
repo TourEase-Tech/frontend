@@ -13,3 +13,4 @@ export const clearTokenFromLocalStorage = () => {
   const clearTokenEvent = new Event('clearToken')
   LocalStorageEventTarget.dispatchEvent(clearTokenEvent)
 }
+

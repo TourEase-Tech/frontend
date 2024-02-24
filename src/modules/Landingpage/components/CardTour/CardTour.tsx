@@ -96,7 +96,7 @@ const CardTour = ({ tour }: Props) => {
               />
             </svg>
             <div className='flex items-center gap-2 text-[#A0A2A4] font-normal lg:text-[14px] md:text-[10px] max-md:text-[8px]'>
-              <span>{tour.price}</span>
+              <span>{Number(tour.price).toLocaleString()} VNĐ</span>
             </div>
           </div>
         </div>

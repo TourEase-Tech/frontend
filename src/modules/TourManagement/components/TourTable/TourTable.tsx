@@ -1,8 +1,8 @@
 import HeaderTable from 'src/modules/Share/components/HeaderTable'
 import { ToursListType } from '../../interfaces'
-import Skeleton from 'react-loading-skeleton'
 import { TourTableHeader } from '../../constants'
 import { formatDateTimeVN } from 'src/modules/Share/utils'
+import { Skeleton } from '@mui/material'
 
 interface Props {
   tours: ToursListType
@@ -25,19 +25,19 @@ const TourTable = ({ tours, onEditTour, isLoading, onSort }: Props) => {
                     key={index}
                   >
                     <th className='px-2 py-4 font-medium w-[30%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
                     </th>
                     <th className='px-2 py-4 font-medium w-[17%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />{' '}
                     </th>
                     <th className='px-2 py-4 font-medium w-[17%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />{' '}
                     </th>
                     <th className='px-2 py-4 font-medium w-[17%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />{' '}
                     </th>
                     <th className='px-2 py-4 font-medium w-[17%]'>
-                      <Skeleton className='h-[16px]' borderRadius={20} />
+                      <Skeleton variant='text' sx={{ fontSize: '1rem' }} />{' '}
                     </th>
                   </tr>
                 ))

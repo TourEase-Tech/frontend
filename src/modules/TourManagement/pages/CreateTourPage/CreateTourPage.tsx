@@ -44,6 +44,7 @@ const CreateTourPage = () => {
       if (response.ok) {
         const data = await response.json()
         setValue('images', data.secure_url)
+        
       } else {
         console.log('Failed to uploading file: ' + response.statusText)
       }

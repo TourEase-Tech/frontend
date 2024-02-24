@@ -9,7 +9,7 @@ import TourOutlinedIcon from '@mui/icons-material/TourOutlined'
 const SideBar = () => {
   return (
     <div className='block border-none whitespace-nowrap '>
-      <div className='fixed h-[600px] flex flex-col top-0 left-0 outline-0 m-4 rounded-xl overflow-y-auto z-50 shadow-lg border-none bg-gradient-to-br from-gray-800 to-black transform translate-x-0 transition-transform duration-200 ease-in-out'>
+      <div className='fixed h-[600px] flex flex-col top-0 left-0 outline-0 m-4 rounded-xl overflow-y-auto z-50 shadow-lg border-none bg-gradient-to-br from-gray-800 to-black transform translate-x-0 transition-transform duration-200 ease-in-out '>
         <div className='px-[32px] pt-[24px] pb-[8px]'>
           {/* <div className='absolute top-0 right-0 p-[13px] bg-transparent text-[#344767]'>
             <svg

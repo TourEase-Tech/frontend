@@ -8,12 +8,33 @@ import { Popover } from '@mui/material'
 import Button from 'src/modules/Share/components/Button'
 import { clearTokenFromLocalStorage } from 'src/modules/Authentication/utils/auth'
 import { Profile } from 'src/modules/Share/interfaces'
+import ModalCustom from 'src/modules/Share/components/ModelCustom'
+import EditProfile from 'src/modules/Share/components/EditProfile'
+import ChangePassword from 'src/modules/Share/components/ChangePassword'
 
 interface Props {
   profile: Profile
 }
 const HomeHeader = ({ profile }: Props) => {
   const { isAuthenticated, setIsAuthenticated } = useContext(AppContext)
+
+  const [isOpenModalProfile, setIsOpenModalProfile] = useState<boolean>(false)
+
+  const [isOpenModalChangePassword, setIsOpenModalChangePassword] = useState<boolean>(false)
+
+  const handleCloseModelProfile = () => {
+    setIsOpenModalProfile(false)
+  }
+  const handleOpenModelProfile = () => {
+    setIsOpenModalProfile(true)
+  }
+  const handleOpenModalChangePassword = () => {
+    setIsOpenModalChangePassword(true)
+  }
+
+  const handleCloseModelChangePassword = () => {
+    setIsOpenModalChangePassword(false)
+  }
 
   const navigate = useNavigate()
 
@@ -72,7 +93,7 @@ const HomeHeader = ({ profile }: Props) => {
                   )
                 }
               >
-                Tour
+                Tours
               </NavLink>
               <NavLink
                 to={'/things-to-do'}
@@ -115,7 +136,7 @@ const HomeHeader = ({ profile }: Props) => {
                   classNameButton='relative bg-slate-300 rounded-full outline-none w-[52px] pt-[100%]'
                 >
                   <img
-                    src=''
+                    src='https://res.cloudinary.com/dz1kgngrn/image/upload/v1708760435/images/4cb3e834744d6ffe55d1ccf6d850add1_e0tffe.jpg'
                     alt='avatar'
                     className='rounded-full top-0 h-full w-full object-cover object-top absolute'
                   />
@@ -134,9 +155,12 @@ const HomeHeader = ({ profile }: Props) => {
                     horizontal: 'right'
                   }}
                 >
-                  <Link
-                    to={'/profile'}
-                    className='flex justify-center items-center cursor-pointer text-sm font-medium hover:bg-gray-100 hover:text-gray-800 px-3 py-2 max-md:px-2'
+                  <Button
+                    onClick={() => {
+                      handleClosePopover()
+                      handleOpenModelProfile()
+                    }}
+                    classNameButton='flex items-center cursor-pointer w-full px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-800'
                   >
                     <svg
                       fill='none'
@@ -150,11 +174,14 @@ const HomeHeader = ({ profile }: Props) => {
                     >
                       <path d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
                     </svg>
-                    <span className='w-[140px] max-md:w-[120px] max-md:text-[12px] line-clamp-1'>Profile</span>
-                  </Link>
+                    <span className='w-[140px] max-md:w-[120px] max-md:text-[12px] line-clamp-1 text-start'>
+                      Profile
+                    </span>
+                  </Button>
                   <Button
                     onClick={() => {
                       handleClosePopover()
+                      handleOpenModalChangePassword()
                     }}
                     classNameButton='flex items-center cursor-pointer w-full px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-800'
                   >
@@ -198,6 +225,12 @@ const HomeHeader = ({ profile }: Props) => {
                   </Button>
                 </Popover>
               </div>
+              <ModalCustom isOpenModal={isOpenModalProfile} handleClose={handleCloseModelProfile}>
+                <EditProfile handleCloseModal={handleCloseModelProfile} />
+              </ModalCustom>
+              <ModalCustom isOpenModal={isOpenModalChangePassword} handleClose={handleCloseModelChangePassword}>
+                <ChangePassword handleCloseModal={handleCloseModelChangePassword} />
+              </ModalCustom>
             </div>
           ) : (
             <Link

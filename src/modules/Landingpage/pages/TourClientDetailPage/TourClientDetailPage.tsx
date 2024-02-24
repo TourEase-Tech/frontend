@@ -7,6 +7,7 @@ import { FormLike } from 'src/modules/TourManagement/interfaces'
 import { GetTourByIdQuery, LikeOrUnlikeTourCommandHandler } from 'src/modules/TourManagement/services'
 import CommentList from '../../components/CommentList'
 import { useQueryParams } from 'src/modules/Share/hooks'
+import { CircularProgress } from '@mui/material'
 
 const TourClientDetailPage = () => {
   const queryTourConfig = useQueryParams()
@@ -32,7 +33,7 @@ const TourClientDetailPage = () => {
         <title>Tour Detail</title>
         <meta name='description' content='This is tour detail of the project' />
       </Helmet>
-      {tour && (
+      {tour ? (
         <div className='flex flex-col mx-auto px-20 py-10 gap-4'>
           <h1 className='text-[28px] leading-10 text-black font-semibold'>{tour?.name}</h1>
           <div className='mb-5 flex items-start gap-2'>
@@ -112,6 +113,10 @@ const TourClientDetailPage = () => {
               </div>
             </div>
           </div>
+        </div>
+      ) : (
+        <div className='flex items-center justify-center w-full h-[200px]'>
+          <CircularProgress color='secondary' variant='indeterminate' />
         </div>
       )}
     </Fragment>
