@@ -10,6 +10,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Visibility from '@mui/icons-material/Visibility'
+import { ChangePasswordCommandHanlder } from 'src/modules/Authentication/services'
+import { toast } from 'react-toastify'
 
 interface Props {
   handleCloseModal: () => void
@@ -22,10 +24,24 @@ const ChangePassword = ({ handleCloseModal }: Props) => {
     setIsHiddenPassword(!isHiddenPassword)
   }
 
-  const { control } = useForm<FormChangePasswordType>({
+  const { control, handleSubmit } = useForm<FormChangePasswordType>({
     resolver: yupResolver(FormChangePasswordSchema)
   })
 
+  const changePasswordCommandHandler = new ChangePasswordCommandHanlder()
+
+  const handleSubmitForm = handleSubmit((data) => {
+    changePasswordCommandHandler.handle(
+      data,
+      () => {
+        toast.success('Change password successfully')
+        handleCloseModal()
+      },
+      (err: any) => {
+        toast.error(err)
+      }
+    )
+  })
   return (
     <div className='flex flex-col justify-between md:gap-6 max-md:gap-4 items-center bg-white p-6 rounded-lg md:w-[480px] max-md:w-[300px]'>
       <div className='flex justify-between items-center w-full'>
@@ -43,7 +59,7 @@ const ChangePassword = ({ handleCloseModal }: Props) => {
           </svg>
         </Button>
       </div>
-      <form onSubmit={() => {}} className='w-full'>
+      <form onSubmit={handleSubmitForm} className='w-full'>
         <div className='flex flex-col gap-4'>
           <Controller
             name='currentPassword'
@@ -83,8 +99,18 @@ const ChangePassword = ({ handleCloseModal }: Props) => {
                     id='newPassword'
                     label='New password'
                     placeholder='Provide your new password'
+                    type={isHiddenPassword ? 'password' : 'text'}
                     className='w-full bg-white'
                     onChange={onChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton onClick={togglePasswordVisibility} edge='end'>
+                            {isHiddenPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
                   />
                   <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
                 </div>
@@ -100,9 +126,19 @@ const ChangePassword = ({ handleCloseModal }: Props) => {
                   <TextField
                     id='confirmPassword'
                     label='Confirm new password'
+                    type={isHiddenPassword ? 'password' : 'text'}
                     placeholder='Provide your confirm password'
                     className='w-full bg-white'
                     onChange={onChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton onClick={togglePasswordVisibility} edge='end'>
+                            {isHiddenPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
                   />
                   <span className='block min-h-[20px] text-red-600 text-xs mt-1 font-medium'>{error?.message}</span>
                 </div>
@@ -114,6 +150,7 @@ const ChangePassword = ({ handleCloseModal }: Props) => {
           <Button
             type='submit'
             classNameButton='flex justify-center items-center bg-[#195E8E] lg:w-[72px] lg:h-[50px] md:w-[60px] md:h-[36px] max-md:w-[48px] max-md:h-[24px] text-white p-2 rounded-2xl font-semibold transition-all duration-300 hover:bg-[#195E8E]/90'
+            isLoading={changePasswordCommandHandler.isLoading()}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'

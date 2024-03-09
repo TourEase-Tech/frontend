@@ -22,12 +22,18 @@ class LikeOrUnlikeTourCommandHandler {
         this._queryClient.invalidateQueries({
           queryKey: ['tour']
         })
+        this._queryClient.invalidateQueries({
+          queryKey: ['myFavorite']
+        })
         handleSuccess()
       },
       onError: (error: any) => {
         handleError(error)
       }
     })
+  }
+  isLoading() {
+    return this._likeOrUnlikeTourMutation.isLoading
   }
 }
 export { LikeOrUnlikeTourCommandHandler }

@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from '@tanstack/react-query'
-import useQueryTourConfig from '../../hooks/useQueryTourConfig'
+import { QueryTourConfig } from '../../hooks/useQueryTourConfig'
 import tourServices from './tour.services'
-import { TourListConfig, ToursListType } from '../../interfaces'
+import { DataTourType, TourListConfig } from '../../interfaces'
 
 class GetAllToursQuery {
   private _query
   private _queryTourConfig
 
-  constructor() {
-    this._queryTourConfig = useQueryTourConfig()
+  constructor(queryTourConfig: QueryTourConfig) {
+    this._queryTourConfig = queryTourConfig
     this._query = useQuery({
       queryKey: ['tours', this._queryTourConfig],
       queryFn: () => tourServices.getAllTours(this._queryTourConfig as TourListConfig),
@@ -19,7 +19,7 @@ class GetAllToursQuery {
   }
 
   fetch() {
-    return this._query.data?.data as ToursListType
+    return this._query.data?.data.data.data as DataTourType[]
   }
 
   getTotal() {

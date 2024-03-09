@@ -4,6 +4,12 @@ export interface ToursListType {
   total: number
   data: TourType
 }
+export interface TourSearchListType {
+  message?: string
+  status: string
+  total: number
+  data: DataTourType[]
+}
 
 export interface TourType {
   data: DataTourType[]

@@ -13,7 +13,22 @@ export const FormTourSchema = yup.object({
     .required('Price is required')
     .matches(/^[0-9]+$/, 'Price must be a number'),
   departureLocation: yup.string().trim().required('Departure location is required'),
-  period: yup.string().trim().required('Period is required'),
+  period: yup
+    .string()
+    .trim()
+    .required('Period is required')
+    .test('valid-period', 'Period must be in the format "a ngày b đêm"', function (value) {
+      if (!value) return false
+
+      const matches = value.match(/^(\d+) ngày (\d+) đêm$/)
+
+      if (!matches || matches.length !== 3) return false
+
+      const daysValue = parseInt(matches[1])
+      const nightsValue = parseInt(matches[2])
+
+      return !isNaN(daysValue) && !isNaN(nightsValue) && daysValue >= 0 && nightsValue >= 0
+    }),
   destination: yup.string().trim().required('Destination is required'),
   departureDay: yup
     .string()

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import useQueryUserConfig from '../../hooks/useQueryUserConfig'
 import userServices from './user.services'
-import { UsersListConfig, UsersListType } from '../../interfaces'
+import { DataUserType, UsersListConfig } from '../../interfaces'
 import { useQuery } from '@tanstack/react-query'
 
 class GetAllUsersQuery {
@@ -19,7 +19,7 @@ class GetAllUsersQuery {
   }
 
   fetch() {
-    return this._query.data?.data as UsersListType
+    return this._query.data?.data.data.data as DataUserType[]
   }
 
   getTotal() {

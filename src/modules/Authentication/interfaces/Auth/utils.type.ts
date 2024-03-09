@@ -1,7 +1,7 @@
 export interface SuccessResponse<Data> {
   status: string
   token: string
-  data?: Data
+  data: Data
 }
 export interface ErrorResponse<Data> {
   status: string

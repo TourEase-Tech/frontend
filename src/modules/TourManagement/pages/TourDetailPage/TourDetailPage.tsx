@@ -45,6 +45,8 @@ const TourDetailPage = () => {
   const location = useLocation()
 
   const prevTourConfig = location.state
+  console.log('prevTourConfig', prevTourConfig)
+
   const {
     register,
     handleSubmit,
@@ -68,6 +70,7 @@ const TourDetailPage = () => {
         id: queryTourConfig.id as string
       },
       () => {
+        navigate(path.tour)
         toast.success('Tour updated successfully')
       },
       () => {
@@ -75,6 +78,7 @@ const TourDetailPage = () => {
       }
     )
   })
+
   const handleCancel = () => {
     navigate({
       pathname: path.tour,

@@ -5,6 +5,7 @@ const path = {
   tour_detail: '/tours/detail',
   login: '/login',
   register: '/register',
+  myfavorite: '/myfavorite',
   //Auth
   forget_password: '/forgetPassword',
   reset_password: '/resetPassword',

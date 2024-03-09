@@ -1,6 +1,6 @@
 import HeaderTable from 'src/modules/Share/components/HeaderTable/HeaderTable'
 import { StatusToMessage, UserTableHeader } from '../../constants'
-import { DataUserType, UsersListType } from '../../interfaces'
+import { DataUserType } from '../../interfaces'
 import { Avatar, Skeleton } from '@mui/material'
 import { useState } from 'react'
 import ModalCustom from 'src/modules/Share/components/ModelCustom'
@@ -8,7 +8,7 @@ import UserDetail from '../UserDetail'
 import classNames from 'classnames'
 
 interface Props {
-  users: UsersListType
+  users: DataUserType[]
   onSort: (column: string) => void
   isLoading: boolean
 }
@@ -46,13 +46,20 @@ const UserTable = ({ users, onSort, isLoading }: Props) => {
     return color
   }
   const stringAvatar = (name: string) => {
+    const initials = name
+      .split(' ')
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase()
+
     return {
       sx: {
         bgcolor: stringToColor(name)
       },
-      children: `${name.split(' ')[0][0]}${name.split(' ')[0]}`
+      children: initials
     }
   }
+
   return (
     <div>
       <table className='w-full bg-white text-left border-[1px] border-gray-200 p-2'>
@@ -81,7 +88,7 @@ const UserTable = ({ users, onSort, isLoading }: Props) => {
                   </tr>
                 ))
             : users &&
-              users.data.data.map((user) => (
+              users.map((user) => (
                 <tr
                   className='text-[14px] text-gray-600 border-b-[1px] border-gray-200 cursor-pointer hover:bg-gray-50'
                   key={user.id}

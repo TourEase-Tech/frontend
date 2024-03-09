@@ -6,13 +6,13 @@ export type QueryTourConfig = {
   [key in keyof TourListConfig]: any
 }
 
-const useQueryTourConfig = () => {
+const useQueryTourConfig = (limit?: any) => {
   const queryTourParams: QueryTourConfig = useQueryParams()
   const queryTourConfig: QueryTourConfig = omitBy(
     {
       search: queryTourParams.fields,
       sort: queryTourParams.sort,
-      limit: queryTourParams.limit || 10,
+      limit: queryTourParams.limit || limit || 10,
       page: queryTourParams.page || 1,
       id: queryTourParams.id
     },

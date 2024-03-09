@@ -1,10 +1,10 @@
-export interface UsersListType {
+export interface ResponseUsersListType {
   status: string
   results: number
   total: number
-  data: UserType
+  data: UsersListType
 }
-export interface UserType {
+export interface UsersListType {
   data: DataUserType[]
 }
 export interface DataUserType {

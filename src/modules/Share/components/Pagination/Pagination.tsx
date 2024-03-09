@@ -1,20 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import classNames from 'classnames'
-import { Link, createSearchParams } from 'react-router-dom'
 import Button from '../Button'
-import { QueryUserConfig } from 'src/modules/UserManagement/hooks'
 
 interface Props {
-  queryConfig: QueryUserConfig
+  queryConfig: any
   total: number
-  pathname: string
   className: string
-  setPage?: React.Dispatch<React.SetStateAction<number>>
+  handlePageChange: (page: number) => void
 }
 
 const RANGE = 2
 
-const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props) => {
+const Pagination = ({ queryConfig, total, className, handlePageChange }: Props) => {
   const page = Number(queryConfig.page)
   const pageSize = Math.ceil(total / queryConfig.limit)
 
@@ -69,7 +66,7 @@ const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props)
           return renderDotBefore(index)
         }
 
-        return setPage ? (
+        return (
           <Button
             classNameButton={classNames(
               'mx-1 flex h-8 w-8 cursor-pointer items-center justify-center text-center text-gray-600 shadow-sm rounded border-[1px]',
@@ -78,31 +75,11 @@ const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props)
                 'border-x-gray-200': pageNumber !== page
               }
             )}
-            onClick={() => setPage(pageNumber)}
+            onClick={() => handlePageChange(pageNumber)}
             key={index}
           >
             {pageNumber}
           </Button>
-        ) : (
-          <Link
-            to={{
-              pathname: pathname,
-              search: createSearchParams({
-                ...queryConfig,
-                page: pageNumber.toString()
-              }).toString()
-            }}
-            key={index}
-            className={classNames(
-              'mx-1 flex h-8 w-8 cursor-pointer items-center justify-center text-center text-gray-600 shadow-sm rounded border-[1px]',
-              {
-                'bg-[#26C6DA]/30  border-[#26C6DA]': pageNumber === page,
-                'border-x-gray-200': pageNumber !== page
-              }
-            )}
-          >
-            {pageNumber}
-          </Link>
         )
       })
   }
@@ -123,10 +100,10 @@ const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props)
               <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
             </svg>
           </span>
-        ) : setPage ? (
+        ) : (
           <Button
             classNameButton='mx-1 border-[1px] border-gray-200 rounded flex h-8 w-8 cursor-pointer items-center justify-center text-gray-600 shadow-sm hover:bg-gray-100'
-            onClick={() => setPage(page - 1)}
+            onClick={() => handlePageChange(page - 1)}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -139,28 +116,6 @@ const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props)
               <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
             </svg>
           </Button>
-        ) : (
-          <Link
-            to={{
-              pathname: pathname,
-              search: createSearchParams({
-                ...queryConfig,
-                page: (page - 1).toString()
-              }).toString()
-            }}
-            className='mx-1 border-[1px] border-gray-200 rounded flex h-8 w-8 cursor-pointer items-center justify-center text-gray-600 shadow-sm hover:bg-gray-100'
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='h-4 w-4 text-[#26C6DA]'
-            >
-              <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
-            </svg>
-          </Link>
         )}
 
         {renderPagination()}
@@ -178,10 +133,10 @@ const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props)
               <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
             </svg>
           </span>
-        ) : setPage ? (
+        ) : (
           <Button
             classNameButton='mx-1 border-[1px] border-gray-200 rounded flex h-8 w-8 cursor-pointer items-center justify-center text-gray-600 shadow-sm hover:bg-gray-100'
-            onClick={() => setPage(page + 1)}
+            onClick={() => handlePageChange(page + 1)}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -194,28 +149,6 @@ const Pagination = ({ queryConfig, total, pathname, className, setPage }: Props)
               <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
             </svg>
           </Button>
-        ) : (
-          <Link
-            to={{
-              pathname: pathname,
-              search: createSearchParams({
-                ...queryConfig,
-                page: (page + 1).toString()
-              }).toString()
-            }}
-            className='mx-1 border-[1px] border-gray-200 rounded flex h-8 w-8 cursor-pointer items-center justify-center  text-gray-600 shadow-sm'
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='h-4 w-4 text-[#26C6DA]'
-            >
-              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
-            </svg>
-          </Link>
         )}
       </div>
     </div>

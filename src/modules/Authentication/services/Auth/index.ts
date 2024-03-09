@@ -1,3 +1,5 @@
 export * from './auth.services'
 export * from './signIn.command-handler'
 export * from './signUp.command-handler'
+export * from './changePassword.command-handler'
+export * from './forgetPassword.command-handler'

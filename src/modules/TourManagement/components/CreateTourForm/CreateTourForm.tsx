@@ -73,7 +73,7 @@ const CreateTourForm = ({ register, onChange, control, errors, tour, previewImag
                   <TextField
                     id='period'
                     label='Period'
-                    placeholder='Enter Period'
+                    placeholder='Enter Period: Ex: 4 ngày 2 đêm'
                     className='w-full bg-white'
                     onChange={onChange}
                   />

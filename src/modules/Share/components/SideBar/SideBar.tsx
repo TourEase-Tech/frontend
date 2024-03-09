@@ -11,18 +11,6 @@ const SideBar = () => {
     <div className='block border-none whitespace-nowrap '>
       <div className='fixed h-[600px] flex flex-col top-0 left-0 outline-0 m-4 rounded-xl overflow-y-auto z-50 shadow-lg border-none bg-gradient-to-br from-gray-800 to-black transform translate-x-0 transition-transform duration-200 ease-in-out '>
         <div className='px-[32px] pt-[24px] pb-[8px]'>
-          {/* <div className='absolute top-0 right-0 p-[13px] bg-transparent text-[#344767]'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth={1.5}
-              stroke='currentColor'
-              className='w-6 h-6'
-            >
-              <path strokeLinecap='round' strokeLinejoin='round' d='M6 18 18 6M6 6l12 12' />
-            </svg>
-          </div> */}
           <Link to={path.dashboard}>
             <img src={logo} className='overflow-hidden w-40 h-40 ' alt='logo' />
           </Link>

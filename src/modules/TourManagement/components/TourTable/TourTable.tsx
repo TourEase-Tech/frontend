@@ -1,11 +1,11 @@
 import HeaderTable from 'src/modules/Share/components/HeaderTable'
-import { ToursListType } from '../../interfaces'
+import { DataTourType } from '../../interfaces'
 import { TourTableHeader } from '../../constants'
 import { formatDateTimeVN } from 'src/modules/Share/utils'
 import { Skeleton } from '@mui/material'
 
 interface Props {
-  tours: ToursListType
+  tours: DataTourType[]
   onEditTour: (id: string) => void
   onSort: (column: string) => void
   isLoading: boolean
@@ -42,7 +42,7 @@ const TourTable = ({ tours, onEditTour, isLoading, onSort }: Props) => {
                   </tr>
                 ))
             : tours &&
-              tours.data.data.map((tour) => (
+              tours.map((tour) => (
                 <tr
                   className='text-[14px] text-gray-600 border-b-[1px] border-gray-200 cursor-pointer hover:bg-gray-50'
                   key={tour.id}
@@ -52,9 +52,13 @@ const TourTable = ({ tours, onEditTour, isLoading, onSort }: Props) => {
                     <span className='line-clamp-2 '>{tour.name}</span>
                   </th>
                   <th className='px-2 py-4 font-medium w-[17%] text-center'>{tour.departureLocation}</th>
-                  <th className='px-2 py-4 font-medium w-[17%] text-center'>{tour.destination}</th>
+                  <th className='px-2 py-4 font-medium w-[17%] text-center overflow-hidden'>
+                    <span className='truncate'>{tour.destination}</span>
+                  </th>
                   <th className='px-2 py-4 font-medium w-[17%] text-center'>{formatDateTimeVN(tour.departureDay)}</th>
-                  <th className='px-2 py-4 font-medium w-[17%] text-center truncate'>{tour.price}</th>
+                  <th className='px-2 py-4 font-medium w-[17%] text-center truncate'>
+                    {Number(tour.price).toLocaleString()} VND
+                  </th>
                 </tr>
               ))}
         </tbody>
