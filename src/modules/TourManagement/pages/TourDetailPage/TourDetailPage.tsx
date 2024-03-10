@@ -45,7 +45,6 @@ const TourDetailPage = () => {
   const location = useLocation()
 
   const prevTourConfig = location.state
-  console.log('prevTourConfig', prevTourConfig)
 
   const {
     register,

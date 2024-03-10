@@ -122,7 +122,6 @@ const TourClientPage = () => {
       console.error('Error fetching tours:', error)
     }
   }
-  console.log(isSearching)
 
   return (
     <Fragment>
