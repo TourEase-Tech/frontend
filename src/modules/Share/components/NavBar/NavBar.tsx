@@ -5,7 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import { useContext, useEffect, useState } from 'react'
 import { Popover } from '@mui/material'
 import { AppContext } from '../../contexts'
-import { clearTokenFromLocalStorage } from 'src/modules/Authentication/utils/auth'
+import { clearTokenFromLocalStorage, clearUserIdFromLocalStorage } from 'src/modules/Authentication/utils/auth'
 import { useLocation, useNavigate } from 'react-router-dom'
 import path from '../../constants/path'
 import ModalCustom from '../ModelCustom'
@@ -40,6 +40,7 @@ const NavBar = () => {
   const handleLogout = () => {
     setIsAuthenticated(false)
     clearTokenFromLocalStorage()
+    clearUserIdFromLocalStorage()
     navigate(path.home_page)
   }
 

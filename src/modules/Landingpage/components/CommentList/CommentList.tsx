@@ -157,6 +157,9 @@ const CommentList = () => {
                 type='button'
                 classNameButton='bg-[#26da38] py-2 px-6 rounded-xl text-[14px] text-white font-semibold mt-2'
                 onClick={handleSubmitForm}
+                isLoading={
+                  isEditComment ? editCommentCommandHandle.isLoading() : createCommentCommandHandle.isLoading()
+                }
               >
                 {isEditComment ? 'Save' : 'Submit'}
               </Button>

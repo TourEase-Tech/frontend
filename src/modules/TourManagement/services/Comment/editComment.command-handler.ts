@@ -32,6 +32,9 @@ class EditCommentCommandHandler {
       }
     })
   }
+  isLoading() {
+    return this._editCommentMutation.isLoading
+  }
 }
 
 export { EditCommentCommandHandler }
