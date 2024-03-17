@@ -1,0 +1,1 @@
+import{j as e,r as s,H as a}from"./index-05eb5af8.js";const t=()=>e.jsx(s.Fragment,{children:e.jsxs(a,{children:[e.jsx("title",{children:"Dashboard"}),e.jsx("meta",{name:"description",content:"This is dashboard page of the project"})]})}),o=t;export{o as default};

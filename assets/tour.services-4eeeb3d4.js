@@ -1,0 +1,1 @@
+import{q as r}from"./index-05eb5af8.js";const o={getAllTours:t=>r.get("v1/tours/getAllTours",{params:t}),getDetailTour:t=>r.get(`v1/tours/getDetailTour/${t}`),createTour:t=>r.post("v1/tours/createTour",t),editTour:t=>r.patch("v1/tours/updateTour",t),getToursBySearch:t=>r.get("v1/tours/searchTour",{params:t}),getMyFavorite:()=>r.get("v1/tours/getFavoriteTourList")};export{o as t};
