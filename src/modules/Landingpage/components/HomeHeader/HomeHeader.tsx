@@ -121,7 +121,7 @@ const HomeHeader = ({ profile }: Props) => {
                   )
                 }
               >
-                Plant your trip
+                Plan your trip
               </NavLink>
             </ul>
           </div>

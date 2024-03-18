@@ -86,7 +86,7 @@ const MyFavoritePage = () => {
               </Swiper>
             </div>
           </div>
-          <TourSlider heading='Recomment Tour' tours={recommendedTours} />
+          <TourSlider heading='Recommend Tour' tours={recommendedTours} />
         </div>
       ) : (
         <div className='flex items-center justify-center w-full h-[200px]'>
