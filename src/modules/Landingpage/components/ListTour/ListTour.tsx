@@ -136,7 +136,7 @@ const ListTour = ({
               anchorReference='anchorEl'
             >
               <form onSubmit={handleSubmitFormFilter}>
-                <FilterListTour control={control} onResetForm={handleResetFormFilter} />
+                <FilterListTour tours={tours} control={control} onResetForm={handleResetFormFilter} />
               </form>
             </Popover>
           </div>

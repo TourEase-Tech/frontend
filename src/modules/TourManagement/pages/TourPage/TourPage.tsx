@@ -196,7 +196,7 @@ const TourPage = () => {
               anchorReference='anchorEl'
             >
               <form onSubmit={FilterTourForm.handleSubmit(handleFilterSubmit)}>
-                <FilterListTour control={FilterTourForm.control} onResetForm={handleResetFormFilter} />
+                <FilterListTour tours={tours} control={FilterTourForm.control} onResetForm={handleResetFormFilter} />
               </form>
             </Popover>
             <Link

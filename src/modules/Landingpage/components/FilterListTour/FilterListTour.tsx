@@ -3,23 +3,19 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Control, Controller } from 'react-hook-form'
 import Button from 'src/modules/Share/components/Button'
+import { DataTourType } from 'src/modules/TourManagement/interfaces'
 import { FormFilterTourType } from 'src/modules/TourManagement/utils/rules/filter_tour.rules'
 
 interface Props {
+  tours: DataTourType[]
   control: Control<FormFilterTourType>
   onResetForm: () => void
 }
-const FilterListTour = ({ control, onResetForm }: Props) => {
-  const optionsDepartureLocation = [
-    { id: '1', name: 'Hồ Chí Minh' },
-    { id: '2', name: 'Hà Nội' },
-    { id: '3', name: 'Đà Nẵng' }
-  ]
-  const optionsPeriod = [
-    { id: '1', name: '2 ngày 2 đêm' },
-    { id: '2', name: '2 ngày 3 đêm' },
-    { id: '3', name: '3 ngày 2 đêm' }
-  ]
+const FilterListTour = ({ tours, control, onResetForm }: Props) => {
+  const optionsDepartureLocation = Array.from(new Set(tours.map((tour) => tour.departureLocation)))
+
+  const optionsPeriod = Array.from(new Set(tours.map((tour) => tour.period)))
+
   return (
     <div className='w-[360px] px-6 py-8 shadow-md text-gray-600'>
       <div className='flex flex-col gap-y-6'>
@@ -32,10 +28,10 @@ const FilterListTour = ({ control, onResetForm }: Props) => {
                 disablePortal
                 id='departureLocation'
                 options={optionsDepartureLocation}
-                getOptionLabel={(option) => option.name}
-                value={optionsDepartureLocation.find((option) => option.name === value) || null}
+                getOptionLabel={(option) => option}
+                value={optionsDepartureLocation.find((option) => option === value) || null}
                 renderInput={(params) => <TextField {...params} label='Choose Departure Location' />}
-                onChange={(_, option) => onChange(option ? option.name : '')}
+                onChange={(_, option) => onChange(option ? option : '')}
               />
             </LocalizationProvider>
           )}
@@ -49,10 +45,10 @@ const FilterListTour = ({ control, onResetForm }: Props) => {
                 disablePortal
                 id='period'
                 options={optionsPeriod}
-                getOptionLabel={(option) => option.name}
-                value={optionsPeriod.find((option) => option.name === value) || null}
+                getOptionLabel={(option) => option}
+                value={optionsPeriod.find((option) => option === value) || null}
                 renderInput={(params) => <TextField {...params} label='Choose Period' />}
-                onChange={(_, option) => onChange(option ? option.name : '')}
+                onChange={(_, option) => onChange(option ? option : '')}
               />
             </LocalizationProvider>
           )}
